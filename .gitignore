@@ -1,0 +1,23 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/word-front/node_modules
+/word-front/.pnp
+/word-front/.pnp.js
+
+# testing
+/word-front/coverage
+
+# production
+/word-front/build
+
+# misc
+/word-front/.DS_Store
+/word-front/.env.local
+/word-front/.env.development.local
+/word-front/.env.test.local
+/word-front/.env.production.local
+
+/word-front/npm-debug.log*
+/word-front/yarn-debug.log*
+/word-front/yarn-error.log*
