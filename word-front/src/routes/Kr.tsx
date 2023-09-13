@@ -74,7 +74,7 @@ export default function Kr() {
     // useEffect 내부에서 데이터를 가져온 후의 로직
     const fetchWords = async () => {
         const endpoint = selectedIcon === 'K' ? "/api/v1/kr" : selectedIcon === 'J' ? "/api/v1/jp" : "/api/v1/cn";
-        const response = await fetch(`http://nginx${endpoint}`);
+        const response = await fetch(`https://www.themadmik.com${endpoint}`);
         const json = await response.json();
         setWords(json);
         setIsLoading(false);

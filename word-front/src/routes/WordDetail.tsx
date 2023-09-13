@@ -59,7 +59,7 @@ export default function WordDetail() {
   const { numbering } = useParams<{numbering: string}>();
 
   const fetchExampleData = async (meaningNumbering: string): Promise<IExample> => {
-    const response = await fetch(`http://nginx/api/v1/${numbering}/ex/${meaningNumbering}`);
+    const response = await fetch(`https://www.themadmik.com/api/v1/${numbering}/ex/${meaningNumbering}`);
     if (!response.ok) {
         throw new Error("Network response was not ok");
     }
@@ -72,7 +72,7 @@ export default function WordDetail() {
   useEffect(() => {
     const fetchWordDetail = async () => {
       
-      const response = await fetch(`http://nginx/api/v1/${numbering}`);
+      const response = await fetch(`https://www.themadmik.com/api/v1/${numbering}`);
       const json = await response.json();
       setDetails(json);
     };
