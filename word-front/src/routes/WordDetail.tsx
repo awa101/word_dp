@@ -54,9 +54,14 @@ export interface IExample {
 }
 
 
+type DetailData = IWordMeaning;
+
 export default function WordDetail() {
+  const [isLoading, setIsLoading] = useState(true);
   const [details, setDetails] = useState<IWordMeaning | null>(null);
   const { numbering } = useParams<{numbering: string}>();
+
+  const [exampleData, setExampleData] = useState<IExample | null>(null);
 
   const fetchExampleData = async (meaningNumbering: string): Promise<IExample> => {
     const response = await fetch(`https://www.themadmik.com/api/v1/${numbering}/ex/${meaningNumbering}`);

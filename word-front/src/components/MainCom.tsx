@@ -17,7 +17,7 @@ export function MainCom() {
 
     const handleSearch = async () => {
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/api/v1/search?query=${query}`);
+            const response = await axios.get(`https://www.themadmik.com/api/v1/search?query=${query}`);
             setSearchResults(response.data);
         } catch (error) {
             console.error("Error fetching search results:", error);

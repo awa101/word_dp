@@ -61,7 +61,7 @@ export default function Kr() {
     }
 
     // const { selectedIcon, setSelectedIcon, searchResults, wordRange } = useContext(WordContext);
-    const { selectedIcon, searchResults, wordRange } = context;
+    const { selectedIcon, setSelectedIcon, searchResults, wordRange } = context;
 
 
     const [selectedTabIndex, setSelectedTabIndex] = useState(0);

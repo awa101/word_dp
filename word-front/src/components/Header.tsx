@@ -2,10 +2,10 @@ import React from 'react';
 
 import { Box, HStack } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { AiOutlineMenu } from 'react-icons/ai';
-// import { FaMoon, FaSun } from 'react-icons/fa';
+import { AiOutlineRead, AiOutlineMenu } from 'react-icons/ai';
+import { FaMoon, FaSun } from 'react-icons/fa';
 import { IconButton } from '@chakra-ui/react'
-import { Button, useDisclosure, useColorMode, useColorModeValue} from '@chakra-ui/react';
+import { Button, Input, useDisclosure, useColorMode, useColorModeValue} from '@chakra-ui/react';
 import {
   Drawer,
   DrawerBody,
@@ -22,14 +22,14 @@ import {
 
 
 export default function Header() {
-    // const { toggleColorMode} = useColorMode();
-    // const Icon = useColorModeValue(FaMoon, FaSun);
+    const {colorMode, toggleColorMode} = useColorMode();
+    const Icon = useColorModeValue(FaMoon, FaSun);
     const bgColor = useColorModeValue("white", "gray.700");
 
     return (
         <HStack  bgColor={bgColor} p={1} borderBottomWidth={1} justifyContent={"space-between"}>
             <HStack spacing={"2.5"}>
-                {/* <DrawerMenu /> 
+                {/* <DrawerMenu /> */}
                 <Box ml={3}>
                   <Link to="">
                     <AiOutlineRead size={25}/>
@@ -42,7 +42,7 @@ export default function Header() {
                     variant={"ghost"} 
                     aria-label="Toggle drak mode" 
                     icon={<Icon />}
-                /> */}
+                />
             </HStack>
         </HStack>
     );
@@ -50,7 +50,7 @@ export default function Header() {
 
 function DrawerMenu() {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  // const [placement, setPlacement] = React.useState('left')
+  const [placement, setPlacement] = React.useState('left')
   const btnRef = React.useRef<HTMLButtonElement>(null);
 
   return (

@@ -1,5 +1,5 @@
 import React, { useContext, useState }  from "react";
-import { Box, Menu, MenuButton, MenuItem, MenuList, Heading, Flex, InputGroup, Input, InputRightElement, IconButton, Button, useColorModeValue } from "@chakra-ui/react";
+import { Box, Menu, MenuButton, Text, Link, MenuItem, MenuList, Heading, Flex, InputGroup, Input, InputRightElement, IconButton, Button, useColorModeValue } from "@chakra-ui/react";
 import { FaSearch } from "react-icons/fa";
 import { TbLetterK, TbLetterJ, TbLetterC } from "react-icons/tb";
 import { AiOutlineDown } from "react-icons/ai";
@@ -18,12 +18,12 @@ export default function WordHeader() {
         throw new Error("WordHeader must be used within a WordProvider");
     }
 
-    const { selectedIcon, setSelectedIcon, setSearchResults, setWordRange } = context;
+    const { selectedIcon, setSelectedIcon, setSearchResults, wordRange, setWordRange } = context;
 
 
     const handleSearch = async () => {
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/api/v1/search?query=${query}`);
+            const response = await axios.get(`https://www.themadmik.com/api/v1/search?query=${query}`);
             setSearchResults(response.data);
         } catch (error) {
             console.error("Error fetching search results:", error);
@@ -36,6 +36,9 @@ export default function WordHeader() {
     };
 
     const [selectedRange, setSelectedRange] = useState("1-100");
+    const borderColorOne = useColorModeValue("gray.200", "gray.800");
+    const bgColor = useColorModeValue("white", "gray.700");
+    const borderBottomColor = useColorModeValue("gray.300", "gray.600");
 
     const MenuItemWrapper = ({ range, start, end }: { range: string, start: number, end: number }) => {
         const isSelected = selectedRange === range;
