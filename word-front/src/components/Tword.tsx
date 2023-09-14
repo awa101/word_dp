@@ -1,7 +1,6 @@
-import { Box, SimpleGrid, Heading, useColorModeValue, Flex, Text } from "@chakra-ui/react";
-import { Link } from 'react-router-dom';
+import { Box, SimpleGrid, Heading, Flex, Text } from "@chakra-ui/react";
 import { Card, CardHeader, CardBody, CardFooter } from '@chakra-ui/react'
-import { Input, InputGroup, InputRightElement, IconButton } from "@chakra-ui/react";
+import { IconButton } from "@chakra-ui/react";
 
 import { TbLetterK, TbLetterJ, TbLetterC } from "react-icons/tb";
 

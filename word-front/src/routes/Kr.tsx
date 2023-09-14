@@ -15,7 +15,6 @@ export default function Kr() {
     const [displayCount, setDisplayCount] = useState(20); // 처음에는 20개만 보여줍니다.
 
     const context = useContext(WordContext);
-    const iconColor = useColorModeValue("white", "gray.700");
     const lanColor = useColorModeValue("black", "white");
     const letteColor = useColorModeValue("gray.300", "gray.500");
     const bgColor = useColorModeValue("gray.50", "gray.800");

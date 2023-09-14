@@ -1,5 +1,5 @@
 import React, { useContext, useState }  from "react";
-import { Box, Menu, MenuButton, Text, Link, MenuItem, MenuList, Heading, Flex, InputGroup, Input, InputRightElement, IconButton, Button, useColorModeValue } from "@chakra-ui/react";
+import { Box, Menu, MenuButton, MenuItem, MenuList, Heading, Flex, InputGroup, Input, InputRightElement, IconButton, Button, useColorModeValue } from "@chakra-ui/react";
 import { FaSearch } from "react-icons/fa";
 import { TbLetterK, TbLetterJ, TbLetterC } from "react-icons/tb";
 import { AiOutlineDown } from "react-icons/ai";
