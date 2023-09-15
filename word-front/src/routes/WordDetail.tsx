@@ -83,13 +83,18 @@ export default function WordDetail() {
         setDetails(json);
       } catch (err) {
         console.error(err);
-        setError(err.message);
+        // err 타입을 확인하고 처리
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("An error occurred.");
+        }
         navigate("/not-found");
       } finally {
         setIsLoading(false);
       }
     };
-
+  
     fetchWordDetail();
   }, [numbering, navigate]);
 
