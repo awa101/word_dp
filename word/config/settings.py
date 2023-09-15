@@ -139,6 +139,7 @@ CORS_ALLOW_HEADERS = ["*"]
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
     "https://www.themadmik.com",
+    "https://themadmik.com",
 
 ]
 
