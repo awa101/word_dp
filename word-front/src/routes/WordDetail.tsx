@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import WordDetailCom from "../components/WordDetailCom";
 
@@ -61,7 +61,7 @@ export default function WordDetail() {
   const [details, setDetails] = useState<IWordMeaning | null>(null);
   const [error, setError] = useState<string | null>(null);
   const { numbering } = useParams<{numbering: string}>();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [exampleData, setExampleData] = useState<IExample | null>(null);
 
@@ -74,8 +74,6 @@ export default function WordDetail() {
     return data;
   }
 
-
-
   useEffect(() => {
     const fetchWordDetail = async () => {
       try {
@@ -86,14 +84,14 @@ export default function WordDetail() {
       } catch (err) {
         console.error(err);
         setError(err.message);
-        history.push("/not-found");
+        navigate("/not-found");
       } finally {
         setIsLoading(false);
       }
     };
 
     fetchWordDetail();
-  }, [numbering, history]);
+  }, [numbering, navigate]);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
