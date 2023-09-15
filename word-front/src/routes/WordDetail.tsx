@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 import WordDetailCom from "../components/WordDetailCom";
 
@@ -59,7 +59,9 @@ type DetailData = IWordMeaning;
 export default function WordDetail() {
   const [isLoading, setIsLoading] = useState(true);
   const [details, setDetails] = useState<IWordMeaning | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const { numbering } = useParams<{numbering: string}>();
+  const history = useHistory();
 
   const [exampleData, setExampleData] = useState<IExample | null>(null);
 
@@ -70,31 +72,42 @@ export default function WordDetail() {
     }
     const data: IExample = await response.json();
     return data;
-}
+  }
 
 
 
   useEffect(() => {
     const fetchWordDetail = async () => {
-      
-      const response = await fetch(`https://www.themadmik.com/api/v1/${numbering}`);
-      const json = await response.json();
-      setDetails(json);
+      try {
+        const response = await fetch(`https://www.themadmik.com/api/v1/${numbering}`);
+        if (!response.ok) throw new Error("API call failed");
+        const json = await response.json();
+        setDetails(json);
+      } catch (err) {
+        console.error(err);
+        setError(err.message);
+        history.push("/not-found");
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     fetchWordDetail();
-  }, [numbering]);
+  }, [numbering, history]);
 
-  if (!details) return <div>Loading...</div>;
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
 
-  return <Box 
-  overflow="hidden" 
-  m="0 auto"  
-  w="90%"  
-  mt={5}
-  mb={1}
-  textAlign="center"
->
-    <WordDetailCom detail={details!} fetchExampleData={fetchExampleData}/>
-  </Box>
-} 
+  return (
+    <Box
+      overflow="hidden"
+      m="0 auto"
+      w="90%"
+      mt={5}
+      mb={1}
+      textAlign="center"
+    >
+      <WordDetailCom detail={details!} fetchExampleData={fetchExampleData}/>
+    </Box>
+  );
+}
