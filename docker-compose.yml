@@ -22,7 +22,7 @@ services:
     build:
       context: ./word
       dockerfile: Dockerfile
-    network_mode: host
+    
 
     volumes:
       - ./word:/word
@@ -40,6 +40,21 @@ services:
 
       
     restart: always
+
+
+  nginx:
+    container_name: nginx 
+    image: nginx:latest
+    ports:
+      - "80:80"
+      - "443:443" 
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - /etc/nginx/ssl:/etc/nginx/ssl # SSL 인증서 볼륨 바인딩 추가
+    depends_on:
+      - web
+    restart: always
+
 
   
 
