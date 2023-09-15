@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DATABASE="mydatabase"
+DATABASE="word"
 USER="madmik"
 PASSWORD="madmik"
 BASE_PATH="/csv"
