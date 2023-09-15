@@ -13,6 +13,7 @@ services:
 
     volumes:
       - mysql_data:/var/lib/mysql # 네임드 볼륨
+      - ./mysql/my.cnf:/etc/my.cnf
     ports:
       - "3306:3306"
     restart: always 
