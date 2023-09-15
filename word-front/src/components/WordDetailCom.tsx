@@ -110,8 +110,8 @@ import { Box, Heading,  IconButton, Accordion, AccordionItem,  AccordionButton, 
                       icon={<TbLetterK />}
                       variant={"outline"}
                       m={1}
-                      bg={selectedIcon === 'K' ? {lanColor} : iconColor}
-                      color={selectedIcon === 'K' ? {letteColor} : undefined}
+                      bg={selectedIcon === 'K' ? lanColor : iconColor}
+                      color={selectedIcon === 'K' ? letteColor : undefined}
                       onClick={() => setSelectedIcon('K')}
   
                       _hover={{ bg: lanColor }}
@@ -122,8 +122,8 @@ import { Box, Heading,  IconButton, Accordion, AccordionItem,  AccordionButton, 
                       icon={<TbLetterJ />}
                       variant={"outline"}
                       m={1}
-                      bg={selectedIcon === 'J' ? {lanColor} : iconColor}
-                      color={selectedIcon === 'J' ? {letteColor} : undefined}
+                      bg={selectedIcon === 'J' ? lanColor : iconColor}
+                      color={selectedIcon === 'J' ? letteColor : undefined}
                       onClick={() => setSelectedIcon('J')}
   
                       _hover={{ bg: lanColor }}
@@ -134,8 +134,8 @@ import { Box, Heading,  IconButton, Accordion, AccordionItem,  AccordionButton, 
                       icon={<TbLetterC />}
                       variant={"outline"}
                       m={1}
-                      bg={selectedIcon === 'C' ? {lanColor} : iconColor}
-                      color={selectedIcon === 'C' ? {letteColor} : undefined}
+                      bg={selectedIcon === 'C' ? lanColor : iconColor}
+                      color={selectedIcon === 'C' ? letteColor : undefined}
                       onClick={() => setSelectedIcon('C')}
   
                       _hover={{ bg: lanColor }}
