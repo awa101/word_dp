@@ -22,6 +22,7 @@ services:
     build:
       context: ./word
       dockerfile: Dockerfile
+    network_mode: host
 
     volumes:
       - ./word:/word
@@ -34,22 +35,9 @@ services:
       dockerfile: Dockerfile
     volumes:
       - front_build:/word-front/build
-    ports:
-      - "3000:3000"
+    # ports:
+    #   - "3000:3000"
 
-
-  nginx:
-    container_name: nginx 
-
-    image: nginx:latest
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - front_build:/word-front/build
-    depends_on:
-      - web
-      - frontend
       
     restart: always
 
