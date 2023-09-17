@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { createContext } from 'react';
 import { WordData } from '../components/type'; 
+import { LAN, LanType } from "./Lan";
 
 
 const defaultContextValue: WordContextType = {
@@ -14,15 +15,13 @@ const defaultContextValue: WordContextType = {
 const WordContext = React.createContext<WordContextType>(defaultContextValue);
 
 
-
 export interface WordContextType {
-    selectedIcon: string | null;
-    setSelectedIcon: React.Dispatch<React.SetStateAction<string | null>>;
+    selectedIcon: LanType| null;
+    setSelectedIcon: React.Dispatch<React.SetStateAction<LanType | null>>;
     searchResults: WordData[];  
     setSearchResults: React.Dispatch<React.SetStateAction<WordData[]>>;  
     wordRange: [number, number];
     setWordRange: React.Dispatch<React.SetStateAction<[number, number]>>;
 }
-
 
 export default WordContext;

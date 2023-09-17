@@ -1,11 +1,11 @@
 import React, { useContext, useState }  from "react";
-import { Box, Menu, MenuButton, MenuItem, MenuList, Heading, Flex, InputGroup, Input, InputRightElement, IconButton, Button, useColorModeValue } from "@chakra-ui/react";
+import { Box, Menu, MenuButton, Text, Link, MenuItem, MenuList, Heading, Flex, InputGroup, Input, InputRightElement, IconButton, Button, useColorModeValue } from "@chakra-ui/react";
 import { FaSearch } from "react-icons/fa";
 import { TbLetterK, TbLetterJ, TbLetterC } from "react-icons/tb";
 import { AiOutlineDown } from "react-icons/ai";
 import axios from 'axios';
 import WordContext from "./WordContext";
-
+import { LAN, LanType } from "./Lan";
 
 
 
@@ -42,7 +42,7 @@ export default function WordHeader() {
 
     const MenuItemWrapper = ({ range, start, end }: { range: string, start: number, end: number }) => {
         const isSelected = selectedRange === range;
-        const bgColor = isSelected ? "gray.200" : undefined;
+        const bgColor = isSelected ? searchIconColor : undefined;
     
         return (
             <MenuItem 
@@ -58,9 +58,10 @@ export default function WordHeader() {
 
 
     const iconColor = useColorModeValue("white", "gray.700");
-    const lanColor = useColorModeValue("teal.100", "blue.700");
+    const lanColor = useColorModeValue("teal.100", "blue.600");
     const letteColor = useColorModeValue("black", "white");
     const searchIconColor = useColorModeValue("gray.200", "gray.600");
+    const headingTextColor = useColorModeValue("gray.700", "gray.200");
 
     return (
       <>
@@ -71,6 +72,22 @@ export default function WordHeader() {
             mt={10}
             mb={5}
         >
+            <Box>
+                <Box textAlign="center" m={12} mb={8}>
+                    <Heading fontSize="2xl" color={headingTextColor}>
+                        {selectedIcon === LAN.K ? '한중일 공통 어휘집' :
+                        selectedIcon === LAN.J ? '日中韓共通語彙集' : 
+                        selectedIcon === LAN.C ? '中日韩共用汉字词典' : '한국어'}
+                    </Heading>
+                </Box>
+            </Box>
+            <Box textAlign="center" mb={10}>
+                <Heading fontSize="xl" color={headingTextColor}>
+                    {selectedIcon === LAN.K ? '한국어' :
+                    selectedIcon === LAN.J ? '日本語' : 
+                    selectedIcon === LAN.C ? '汉语' : '한국어'}
+                </Heading>
+            </Box>
             <Box w="100%" display="flex" justifyContent="center" p={4} pt={8}>
                 <InputGroup w="100%" bg={iconColor}>
                 <Input 
@@ -103,13 +120,10 @@ export default function WordHeader() {
               mb={1}
               textAlign="center"
           >
-              <Box textAlign="center" mb={14}>
-                <Heading fontSize="2xl">
-                    {selectedIcon === 'K' ? '한국어' :
-                    selectedIcon === 'J' ? '日本語' : 
-                    selectedIcon === 'C' ? '汉语' : '한국어'}
-                </Heading>
-              </Box>
+            <Box textAlign="center" m={6}>
+
+            </Box>
+
               <Box display="flex" justifyContent="space-between">
                 <Flex ml={2}>
                     <IconButton
@@ -118,9 +132,9 @@ export default function WordHeader() {
                         icon={<TbLetterK />}
                         variant={"outline"}
                         m={1}
-                        bg={selectedIcon === 'K' ? lanColor : iconColor}
-                        color={selectedIcon === 'K' ? letteColor : undefined}
-                        onClick={() => setSelectedIcon('K')}
+                        bg={selectedIcon === LAN.K ? lanColor : iconColor}
+                        color={selectedIcon === LAN.K ? letteColor : undefined}
+                        onClick={() => setSelectedIcon(LAN.K)}
 
                         _hover={{ bg: lanColor }}
                     />
@@ -130,9 +144,9 @@ export default function WordHeader() {
                         icon={<TbLetterJ />}
                         variant={"outline"}
                         m={1}
-                        bg={selectedIcon === 'J' ? lanColor : iconColor}
-                        color={selectedIcon === 'J' ? letteColor : undefined}
-                        onClick={() => setSelectedIcon('J')}
+                        bg={selectedIcon === LAN.J ? lanColor : iconColor}
+                        color={selectedIcon === LAN.J ? letteColor : undefined}
+                        onClick={() => setSelectedIcon(LAN.J)}
 
                         _hover={{ bg: lanColor }}
                     />
@@ -142,9 +156,9 @@ export default function WordHeader() {
                         icon={<TbLetterC />}
                         variant={"outline"}
                         m={1}
-                        bg={selectedIcon === 'C' ? lanColor : iconColor}
-                        color={selectedIcon === 'C' ? letteColor : undefined}
-                        onClick={() => setSelectedIcon('C')}
+                        bg={selectedIcon === LAN.C ? lanColor : iconColor}
+                        color={selectedIcon === LAN.C ? letteColor : undefined}
+                        onClick={() => setSelectedIcon(LAN.C)}
 
                         _hover={{ bg: lanColor }}
                     />
@@ -154,8 +168,8 @@ export default function WordHeader() {
                         <MenuButton as={Button} rightIcon={<AiOutlineDown />} >
                             {selectedRange}
                         </MenuButton>
-                        <MenuList textAlign={"center"} >
-                            <MenuItemWrapper range="1-100" start={0} end={100} />
+                        <MenuList textAlign={"center"}  >
+                            <MenuItemWrapper range="1-100" start={0} end={100}/>
                             <MenuItemWrapper range="101-200" start={100} end={200} />
                             <MenuItemWrapper range="201-300" start={200} end={300} />
                             <MenuItemWrapper range="301-400" start={300} end={400} />

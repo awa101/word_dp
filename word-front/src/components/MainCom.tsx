@@ -1,9 +1,11 @@
 import React, { useContext, useState } from "react";
-import { Box, CardBody, CardFooter,  Text, SimpleGrid, Card, CardHeader, Heading, Flex, InputGroup, Input, InputRightElement, IconButton, useColorModeValue } from "@chakra-ui/react";
+import { Box, CardBody, CardFooter,  Text, SimpleGrid, Card, CardHeader, Heading, Flex, InputGroup, Input, InputRightElement, IconButton, Button, useColorModeValue } from "@chakra-ui/react";
 import { FaSearch } from "react-icons/fa";
 import { TbLetterK, TbLetterJ, TbLetterC } from "react-icons/tb";
 import axios from 'axios';
 import WordContext from "./WordContext";
+import { LAN, LanType } from "./Lan";
+
 
 export function MainCom() {
     const [query, setQuery] = useState('');
@@ -13,7 +15,7 @@ export function MainCom() {
         throw new Error("MainCom must be used within a WordProvider");
     }
 
-    const { selectedIcon, setSelectedIcon, setSearchResults } = context;
+    const { selectedIcon, setSelectedIcon, setSearchResults, wordRange, setWordRange } = context;
 
     const handleSearch = async () => {
         try {
@@ -90,9 +92,9 @@ export function MainCom() {
                                 icon={<TbLetterK />}
                                 variant={"outline"}
                                 m={1}
-                                bg={selectedIcon === 'K' ? lanColor : iconColor}
-                                color={selectedIcon === 'K' ? letteColor : undefined}
-                                onClick={() => setSelectedIcon('K')}
+                                bg={selectedIcon === LAN.K ? lanColor : iconColor}
+                                color={selectedIcon === LAN.K ? letteColor : undefined}
+                                onClick={() => setSelectedIcon(LAN.K)}
 
                                 _hover={{ bg: lanColor }}
                             />
@@ -102,9 +104,9 @@ export function MainCom() {
                                 icon={<TbLetterJ />}
                                 variant={"outline"}
                                 m={1}
-                                bg={selectedIcon === 'J' ? lanColor : iconColor}
-                                color={selectedIcon === 'J' ? letteColor : undefined}
-                                onClick={() => setSelectedIcon('J')}
+                                bg={selectedIcon === LAN.J ? lanColor : iconColor}
+                                color={selectedIcon === LAN.J ? letteColor : undefined}
+                                onClick={() => setSelectedIcon(LAN.J)}
 
                                 _hover={{ bg: lanColor }}
                             />
@@ -114,9 +116,9 @@ export function MainCom() {
                                 icon={<TbLetterC />}
                                 variant={"outline"}
                                 m={1}
-                                bg={selectedIcon === 'C' ? lanColor : iconColor}
-                                color={selectedIcon === 'C' ? letteColor : undefined}
-                                onClick={() => setSelectedIcon('C')}
+                                bg={selectedIcon === LAN.C ? lanColor : iconColor}
+                                color={selectedIcon === LAN.C ? letteColor : undefined}
+                                onClick={() => setSelectedIcon(LAN.C)}
 
                                 _hover={{ bg: lanColor }}
                             />

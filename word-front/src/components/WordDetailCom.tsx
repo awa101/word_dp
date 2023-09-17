@@ -9,6 +9,8 @@ import { Box, Heading,  IconButton, Accordion, AccordionItem,  AccordionButton, 
   import WordContext from "../components/WordContext"; 
   import Flag from 'react-flagkit';
   
+  import { LAN, LanType } from "./Lan";
+  
   
   interface WordDetailComProps {
       detail: IWordMeaning;
@@ -22,7 +24,7 @@ import { Box, Heading,  IconButton, Accordion, AccordionItem,  AccordionButton, 
       const exColor = useColorModeValue("gray.100", "gray.600");
       const iconColor = useColorModeValue("white", "gray.700");
   
-      const lanColor = useColorModeValue("teal.100", "blue.700");
+      const lanColor = useColorModeValue("teal.100", "blue.600");
       const letteColor = useColorModeValue("black", "white");
   
       const [exampleData, setExampleData] = useState<IExample | null>(null);
@@ -45,7 +47,7 @@ import { Box, Heading,  IconButton, Accordion, AccordionItem,  AccordionButton, 
         <>
           <SimpleGrid m={3} mt={10} mb={16} spacing={3} templateColumns='repeat(3, 1fr)'>
           <Card bg={bgColor}>
-              <CardHeader p={2} pb={1} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <CardHeader p={4} pb={1} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                   <Flag country="KR" size={24} />
               </CardHeader>
               <CardBody p={2}>
@@ -63,7 +65,7 @@ import { Box, Heading,  IconButton, Accordion, AccordionItem,  AccordionButton, 
               </CardFooter>
           </Card>
           <Card bg={bgColor}>
-              <CardHeader p={2} pb={1} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <CardHeader p={4} pb={1} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                   <Flag country="JP" size={24} />
               </CardHeader>
               <CardBody p={2} >
@@ -81,7 +83,7 @@ import { Box, Heading,  IconButton, Accordion, AccordionItem,  AccordionButton, 
               </CardFooter>
           </Card>
           <Card bg={bgColor}>
-              <CardHeader p={2} pb={1} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <CardHeader p={4} pb={1} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                   <Flag country="CN" size={22} />
               </CardHeader>
               <CardBody p={2}>
@@ -110,9 +112,9 @@ import { Box, Heading,  IconButton, Accordion, AccordionItem,  AccordionButton, 
                       icon={<TbLetterK />}
                       variant={"outline"}
                       m={1}
-                      bg={selectedIcon === 'K' ? lanColor : iconColor}
-                      color={selectedIcon === 'K' ? letteColor : undefined}
-                      onClick={() => setSelectedIcon('K')}
+                      bg={selectedIcon === LAN.K ? {lanColor} : iconColor}
+                      color={selectedIcon === LAN.K ? {letteColor} : undefined}
+                      onClick={() => setSelectedIcon(LAN.K)}
   
                       _hover={{ bg: lanColor }}
                   />
@@ -122,9 +124,9 @@ import { Box, Heading,  IconButton, Accordion, AccordionItem,  AccordionButton, 
                       icon={<TbLetterJ />}
                       variant={"outline"}
                       m={1}
-                      bg={selectedIcon === 'J' ? lanColor : iconColor}
-                      color={selectedIcon === 'J' ? letteColor : undefined}
-                      onClick={() => setSelectedIcon('J')}
+                      bg={selectedIcon === LAN.J ? {lanColor} : iconColor}
+                      color={selectedIcon === LAN.J ? {letteColor} : undefined}
+                      onClick={() => setSelectedIcon(LAN.J)}
   
                       _hover={{ bg: lanColor }}
                   />
@@ -134,9 +136,9 @@ import { Box, Heading,  IconButton, Accordion, AccordionItem,  AccordionButton, 
                       icon={<TbLetterC />}
                       variant={"outline"}
                       m={1}
-                      bg={selectedIcon === 'C' ? lanColor : iconColor}
-                      color={selectedIcon === 'C' ? letteColor : undefined}
-                      onClick={() => setSelectedIcon('C')}
+                      bg={selectedIcon === LAN.C ? {lanColor} : iconColor}
+                      color={selectedIcon === LAN.C ? {letteColor} : undefined}
+                      onClick={() => setSelectedIcon(LAN.C)}
   
                       _hover={{ bg: lanColor }}
                   />
@@ -157,9 +159,9 @@ import { Box, Heading,  IconButton, Accordion, AccordionItem,  AccordionButton, 
                               <Box as="div" flex='1' textAlign='left'>
                                   <Box p={1} m={0}>
                                       <Text>
-                                          {selectedIcon === 'K' && `${meaning.meaning}`}
-                                          {selectedIcon === 'J' && `${detail.jpmeaning[index].meaning}`}
-                                          {selectedIcon === 'C' && `${detail.cnmeaning[index].meaning}`}
+                                          {selectedIcon === LAN.K && `${meaning.meaning}`}
+                                          {selectedIcon === LAN.J && `${detail.jpmeaning[index].meaning}`}
+                                          {selectedIcon === LAN.C && `${detail.cnmeaning[index].meaning}`}
                                       </Text>
                                   </Box>
                               </Box>

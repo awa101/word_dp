@@ -6,7 +6,8 @@ import WordContext from "../components/WordContext";
 import SearchResults from "../components/SearchResults";
 import { ChevronUpIcon } from '@chakra-ui/icons'
 import { WordData } from "../components/type"
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
+import { Tabs, TabList, TabPanels, Tab, TabPanel, Spinner } from '@chakra-ui/react'
+import { LAN, LanType } from "../components/Lan";
 
 
 export default function Kr() {
@@ -15,6 +16,7 @@ export default function Kr() {
     const [displayCount, setDisplayCount] = useState(20); // 처음에는 20개만 보여줍니다.
 
     const context = useContext(WordContext);
+    const iconColor = useColorModeValue("white", "gray.700");
     const lanColor = useColorModeValue("black", "white");
     const letteColor = useColorModeValue("gray.300", "gray.500");
     const bgColor = useColorModeValue("gray.50", "gray.800");
@@ -27,29 +29,29 @@ export default function Kr() {
         });
     };
 
-    function getLocale(lang: string) {
+    function getLocale(lang: LanType) {
         switch(lang) {
-            case 'K': return 'ko';
-            case 'J': return 'ja';
-            case 'C': return 'zh';
+            case LAN.K: return 'ko';
+            case LAN.J: return 'ja';
+            case LAN.C: return 'zh';
             default: return 'en';
         }
     }
     
     
-    const getTabLabel = (icon: string | null, type: string) => {
+    const getTabLabel = (icon: LanType | null, type: string) => {
         if (type === 'frequency') {
             switch (icon) {
-                case 'K': return '빈도순';
-                case 'J': return '頻度順';
-                case 'C': return '频率顺序';
+                case LAN.K: return '빈도순';
+                case LAN.J: return '頻度順';
+                case LAN.C: return '频率顺序';
                 default: return '빈도순';
             }
         } else if (type === 'alphabetical') {
             switch (icon) {
-                case 'K': return '가나다순';
-                case 'J': return '五十音順';
-                case 'C': return '拼音顺序';
+                case LAN.K: return '가나다순';
+                case LAN.J: return '五十音順';
+                case LAN.C: return '拼音顺序';
                 default: return '가나다순';
             }
         }
@@ -72,7 +74,7 @@ export default function Kr() {
 
     // useEffect 내부에서 데이터를 가져온 후의 로직
     const fetchWords = async () => {
-        const endpoint = selectedIcon === 'K' ? "/api/v1/kr" : selectedIcon === 'J' ? "/api/v1/jp" : "/api/v1/cn";
+        const endpoint = selectedIcon === LAN.K ? "/api/v1/kr" : selectedIcon === LAN.J ? "/api/v1/jp" : "/api/v1/cn";
         const response = await fetch(`https://www.themadmik.com${endpoint}`);
         const json = await response.json();
         setWords(json);
@@ -97,29 +99,29 @@ export default function Kr() {
             .sort((a: WordData, b: WordData) => {
                 let wordA: string;
                 let wordB: string;
-                let langA: string;
-                let langB: string;
+                let langA: LanType;
+                let langB: LanType;
             
                 if ('hangeul' in a) {
                     wordA = a.hangeul;
-                    langA = 'K'; // KR
+                    langA = LAN.K; // KR
                 } else if ('kana' in a) {
                     wordA = a.word;
-                    langA = 'J'; // JP
+                    langA = LAN.J; // JP
                 } else {
                     wordA = a.word;
-                    langA = 'C'; // CN
+                    langA = LAN.C; // CN
                 }
             
                 if ('hangeul' in b) {
                     wordB = b.hangeul;
-                    langB = 'K'; // KR
+                    langB = LAN.K; // KR
                 } else if ('kana' in b) {
                     wordB = b.word;
-                    langB = 'J'; // JP
+                    langB = LAN.J; // JP
                 } else {
                     wordB = b.word;
-                    langB = 'C'; // CN
+                    langB = LAN.C; // CN
                 }
             
                 // 먼저 언어별로 정렬
@@ -204,17 +206,27 @@ export default function Kr() {
                     alignItems="center" 
                     justifyContent="center"
                 >
-                    <Box m={4}>
-                        <Button 
-                            rightIcon={<ChevronUpIcon />} 
-                            colorScheme='teal' 
-                            variant='outline' 
-                            onClick={handleButtonClick}
-                        >
-                        Top
-                    </Button>
-                </Box>
-            </Flex>
+                    {displayCount < 100 ? ( // 데이터의 총 개수가 100 미만일 때
+                        <Spinner
+                            thickness='3px'
+                            speed='0.65s'
+                            emptyColor='gray.200'
+                            color='blue.500'
+                            size='md'
+                        />
+                    ) : ( // 데이터의 총 개수가 100 이상일 때
+                        <Box m={4}>
+                            <Button 
+                                rightIcon={<ChevronUpIcon />} 
+                                colorScheme='teal' 
+                                variant='outline' 
+                                onClick={handleButtonClick}
+                            >
+                            Top
+                            </Button>
+                        </Box>
+                    )}
+                </Flex>
         </SimpleGrid>
 
     );
