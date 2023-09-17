@@ -73,7 +73,7 @@ export default function WordHeader() {
             mb={5}
         >
             <Box>
-                <Box textAlign="center" m={12} mb={8}>
+            <Box textAlign="center" m={10} mb={6}>
                     <Heading fontSize="2xl" color={headingTextColor}>
                         {selectedIcon === LAN.K ? '한중일 공통 어휘집' :
                         selectedIcon === LAN.J ? '日中韓共通語彙集' : 
@@ -81,7 +81,7 @@ export default function WordHeader() {
                     </Heading>
                 </Box>
             </Box>
-            <Box textAlign="center" mb={10}>
+            <Box textAlign="center" mb={8}>
                 <Heading fontSize="xl" color={headingTextColor}>
                     {selectedIcon === LAN.K ? '한국어' :
                     selectedIcon === LAN.J ? '日本語' : 
