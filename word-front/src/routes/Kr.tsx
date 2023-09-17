@@ -13,7 +13,7 @@ import { LAN, LanType } from "../components/Lan";
 export default function Kr() {
     const [isLoading, setIsLoading] = useState(true);
     const [words, setWords] = useState<WordData[]>([]);
-    const [displayCount, setDisplayCount] = useState(20); // 처음에는 20개만 보여줍니다.
+    const [displayCount, setDisplayCount] = useState(20); // 처음에는 20개만 보여줌
 
     const context = useContext(WordContext);
     const iconColor = useColorModeValue("white", "gray.700");
@@ -82,7 +82,7 @@ export default function Kr() {
     };
 
     const handleScroll = () => {
-        if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight) return;
+        if (window.innerHeight + document.documentElement.scrollTop + 50 >= document.documentElement.offsetHeight) return;
         setDisplayCount(prevCount => prevCount + 20); // 스크롤이 끝에 닿으면 20개 추가로 불러옵니다.
     }
 
@@ -206,26 +206,16 @@ export default function Kr() {
                     alignItems="center" 
                     justifyContent="center"
                 >
-                    {displayCount < 100 ? ( // 데이터의 총 개수가 100 미만일 때
-                        <Spinner
-                            thickness='3px'
-                            speed='0.65s'
-                            emptyColor='gray.200'
-                            color='blue.500'
-                            size='md'
-                        />
-                    ) : ( // 데이터의 총 개수가 100 이상일 때
-                        <Box m={4}>
-                            <Button 
-                                rightIcon={<ChevronUpIcon />} 
-                                colorScheme='teal' 
-                                variant='outline' 
-                                onClick={handleButtonClick}
-                            >
-                            Top
-                            </Button>
-                        </Box>
-                    )}
+                    <Box m={4}>
+                        <Button 
+                            rightIcon={<ChevronUpIcon />} 
+                            colorScheme='teal' 
+                            variant='outline' 
+                            onClick={handleButtonClick}
+                        >
+                        Top
+                        </Button>
+                    </Box>
                 </Flex>
         </SimpleGrid>
 

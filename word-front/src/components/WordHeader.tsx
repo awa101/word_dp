@@ -1,5 +1,5 @@
 import React, { useContext, useState }  from "react";
-import { Box, Menu, MenuButton, Text, Link, MenuItem, MenuList, Heading, Flex, InputGroup, Input, InputRightElement, IconButton, Button, useColorModeValue } from "@chakra-ui/react";
+import { Box, Menu, MenuButton, Text, Link, MenuItem, MenuList, Heading, Flex, InputGroup, Input, InputRightElement, IconButton, Button, useColorModeValue, Center } from "@chakra-ui/react";
 import { FaSearch } from "react-icons/fa";
 import { TbLetterK, TbLetterJ, TbLetterC } from "react-icons/tb";
 import { AiOutlineDown } from "react-icons/ai";
@@ -10,6 +10,8 @@ import { LAN, LanType } from "./Lan";
 
 
 export default function WordHeader() {
+    const [searched, setSearched] = useState(false);
+    const [showNoResults, setShowNoResults] = useState(false);
     const [query, setQuery] = useState('');
 
     const context = useContext(WordContext);
@@ -18,17 +20,30 @@ export default function WordHeader() {
         throw new Error("WordHeader must be used within a WordProvider");
     }
 
-    const { selectedIcon, setSelectedIcon, setSearchResults, wordRange, setWordRange } = context;
+    const { selectedIcon, setSelectedIcon, searchResults, setSearchResults, wordRange, setWordRange } = context;
+
 
 
     const handleSearch = async () => {
         try {
+            setSearched(true);
+            setShowNoResults(false);  // 검색 시작 시 결과 없음 메시지 숨기기
+            
             const response = await axios.get(`https://www.themadmik.com/api/v1/search?query=${query}`);
             setSearchResults(response.data);
+    
+            if (response.data.length === 0) { 
+                // 검색 결과가 없으면 1초 후에 결과 없음 메시지 표시
+                setTimeout(() => {
+                    setShowNoResults(true);
+                }, 100);
+            }
         } catch (error) {
             console.error("Error fetching search results:", error);
         }
     };
+    
+    
 
     const handleWordRangeChange = (start: number, end: number) => {
         setWordRange([start, end]);
@@ -36,9 +51,6 @@ export default function WordHeader() {
     };
 
     const [selectedRange, setSelectedRange] = useState("1-100");
-    const borderColorOne = useColorModeValue("gray.200", "gray.800");
-    const bgColor = useColorModeValue("white", "gray.700");
-    const borderBottomColor = useColorModeValue("gray.300", "gray.600");
 
     const MenuItemWrapper = ({ range, start, end }: { range: string, start: number, end: number }) => {
         const isSelected = selectedRange === range;
@@ -96,7 +108,9 @@ export default function WordHeader() {
                     onChange={e => {
                         setQuery(e.target.value);
                         if (e.target.value === '') {
-                            setSearchResults([]); // 검색어가 비어 있을 때 검색 결과를 초기화
+                            setSearchResults([]);
+                            setSearched(false);
+                            setShowNoResults(false); // 검색어가 비어 있을 때 검색 결과를 초기화
                         }
                     }}
                     onKeyPress={e => e.key === 'Enter' && handleSearch()}
@@ -105,12 +119,18 @@ export default function WordHeader() {
                         <IconButton 
                             aria-label="Search" 
                             icon={<FaSearch />} 
-                            bg= {searchIconColor}
+                            bg={searchIconColor}
                             onClick={handleSearch}
                         />
                     </InputRightElement>
                 </InputGroup>
-              </Box>
+            </Box>
+            <Box pt={12}>
+                {showNoResults && <Text color={headingTextColor} mt={2} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    검색결과가 없습니다.
+                </Text>}
+            </Box>
+
           </Box>
           <Box 
               overflow="hidden" 
