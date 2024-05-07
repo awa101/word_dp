@@ -1,7 +1,7 @@
 # 한중일 공통 단어집
 
 ## 사용 데이터
-[한중일 공통 한자어 어휘집](https://tcvd-asia.com/ko/808-chinese-character04)
+[한중일 공통 한자어 어휘집](https://tcvd-asia.com/ko/808-chinese-character04) 한국어 pdf, 일본어 pdf, 중국어 pdf 파일
 <br><br>
 
 ## 기술 스택
@@ -14,7 +14,7 @@
 
 ## 과정
 
-1. **데이터 정제**: 한국어, 중국어, 일본어 각각의 pdf를 word 파일로 변환, 맞춤법 검사 후 pandas로 단어, 뜻, 예문 분리 및 특수문자, 부호 등 제거 <br><br>
+1. **데이터 정제**: 한국어, 중국어, 일본어 각각의 pdf 파일을 word 파일로 변환, 맞춤법 검사 후 pandas로 단어, 뜻, 예문 분리 및 특수문자, 부호 등 제거 <br><br>
 2. **DB 스키마 구성**: 한중일 각각 단어, 뜻, 예문 테이블 구성 <br><br>
 3. **백엔드**: DRF 이용하여 list, detail, search 등 API 구성 <br><br>
 4. **프론트엔드**: React 사용 컴포넌트 기반 아키텍처 설계 및 chakra ui를 사용한 반응형 UI 구성 <br><br>
