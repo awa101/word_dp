@@ -1,7 +1,7 @@
 # 한중일 공통 단어집
 
 ## 사용 데이터
-[한중일 공통 한자어 어휘집](https://tcvd-asia.com/ko/808-chinese-character04) 한국어 pdf, 일본어 pdf, 중국어 pdf 파일
+[한중일 공통 어휘집](https://tcvd-asia.com/ko/) - 한국어, 일본어, 중국어 pdf 파일
 <br><br>
 
 ## 기술 스택
